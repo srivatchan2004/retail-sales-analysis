@@ -1,6 +1,6 @@
 # 🛒 Retail Sales Analysis — SQL Portfolio Project
 
-![SQL](https://img.shields.io/badge/SQL-PostgreSQL-blue?style=flat-square&logo=postgresql)
+![SQL](https://img.shields.io/badge/SQL-MySQL-blue?style=flat-square&logo=mysql)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=flat-square)
 ![Domain](https://img.shields.io/badge/Domain-Data%20Analytics-orange?style=flat-square)
 
@@ -63,16 +63,16 @@ customers ──< orders ──< order_items >── products
 
 ## 🚀 How to Run
 
-**Option 1 — PostgreSQL (recommended)**
+**Option 1 — MySQL (recommended)**
 ```bash
 # Create database
-createdb retail_sales
+mysql -u root -p -e "CREATE DATABASE retail_sales;"
 
 # Load schema and data
-psql -d retail_sales -f schema.sql
+mysql -u root -p retail_sales < schema.sql
 
 # Run analysis
-psql -d retail_sales -f analysis.sql
+mysql -u root -p retail_sales < analysis.sql
 ```
 
 **Option 2 — Online (no install needed)**
@@ -93,7 +93,7 @@ psql -d retail_sales -f analysis.sql
 ✅ CTEs (WITH clause)
 ✅ CASE WHEN for segmentation and pivot
 ✅ NULLIF, COALESCE for safe division
-✅ Date functions with TO_CHAR
+✅ Date functions with DATE_FORMAT
 ✅ Subqueries and derived tables
 ✅ Data quality checks with NULL detection
 ```
@@ -110,4 +110,4 @@ psql -d retail_sales -f analysis.sql
 ---
 
 ## 📌 Tags
-`SQL` `PostgreSQL` `Data Analytics` `Retail Analytics` `Portfolio Project` `Window Functions` `CTE`
+`SQL` `MySQL` `Data Analytics` `Retail Analytics` `Portfolio Project` `Window Functions` `CTE`

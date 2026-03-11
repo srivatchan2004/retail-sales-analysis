@@ -62,9 +62,10 @@ INSERT INTO products VALUES
 -- TABLE: orders
 CREATE TABLE orders (
     order_id    INT PRIMARY KEY,
-    customer_id INT REFERENCES customers(customer_id),
+    customer_id INT,
     order_date  DATE,
-    status      VARCHAR(20)
+    status      VARCHAR(20),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
 INSERT INTO orders VALUES
@@ -108,10 +109,12 @@ INSERT INTO orders VALUES
 -- TABLE: order_items
 CREATE TABLE order_items (
     item_id    INT PRIMARY KEY,
-    order_id   INT REFERENCES orders(order_id),
-    product_id INT REFERENCES products(product_id),
+    order_id   INT,
+    product_id INT,
     quantity   INT,
-    unit_price DECIMAL(10,2)
+    unit_price DECIMAL(10,2),
+    FOREIGN KEY (order_id)   REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
 INSERT INTO order_items VALUES

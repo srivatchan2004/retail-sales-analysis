@@ -28,21 +28,21 @@ ORDER BY total_revenue DESC;
 
 -- QUERY 3: Monthly Revenue Trend (2024)
 SELECT
-    TO_CHAR(o.order_date, 'YYYY-MM')           AS month,
+    DATE_FORMAT(o.order_date, '%Y-%m')          AS month,
     COUNT(DISTINCT o.order_id)                  AS orders,
     SUM(oi.quantity * oi.unit_price)            AS monthly_revenue,
     LAG(SUM(oi.quantity * oi.unit_price))
-        OVER (ORDER BY TO_CHAR(o.order_date, 'YYYY-MM')) AS prev_month_revenue,
+        OVER (ORDER BY DATE_FORMAT(o.order_date, '%Y-%m')) AS prev_month_revenue,
     ROUND(
         (SUM(oi.quantity * oi.unit_price) -
          LAG(SUM(oi.quantity * oi.unit_price))
-            OVER (ORDER BY TO_CHAR(o.order_date, 'YYYY-MM'))) * 100.0 /
+            OVER (ORDER BY DATE_FORMAT(o.order_date, '%Y-%m'))) * 100.0 /
         NULLIF(LAG(SUM(oi.quantity * oi.unit_price))
-            OVER (ORDER BY TO_CHAR(o.order_date, 'YYYY-MM')), 0), 2
+            OVER (ORDER BY DATE_FORMAT(o.order_date, '%Y-%m')), 0), 2
     ) AS mom_growth_pct
 FROM orders o
 JOIN order_items oi ON o.order_id = oi.order_id
-GROUP BY TO_CHAR(o.order_date, 'YYYY-MM')
+GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')
 ORDER BY month;
 
 
@@ -126,11 +126,11 @@ ORDER BY monetary DESC;
 -- QUERY 8: Running Total Revenue (Cumulative)
 WITH monthly AS (
     SELECT
-        TO_CHAR(o.order_date, 'YYYY-MM')    AS month,
+        DATE_FORMAT(o.order_date, '%Y-%m')  AS month,
         SUM(oi.quantity * oi.unit_price)    AS monthly_revenue
     FROM orders o
     JOIN order_items oi ON o.order_id = oi.order_id
-    GROUP BY TO_CHAR(o.order_date, 'YYYY-MM')
+    GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')
 )
 SELECT
     month,
