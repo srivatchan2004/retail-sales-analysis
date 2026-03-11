@@ -1,7 +1,6 @@
--- ============================================================
+-- 
 -- RETAIL SALES ANALYSIS — Schema & Sample Data
 -- Author: Srivatchan
--- ============================================================
 
 -- Drop tables if they exist (for clean re-runs)
 DROP TABLE IF EXISTS order_items;
@@ -9,9 +8,7 @@ DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS customers;
 
--- ============================================================
 -- TABLE: customers
--- ============================================================
 CREATE TABLE customers (
     customer_id   INT PRIMARY KEY,
     customer_name VARCHAR(100),
@@ -37,9 +34,7 @@ INSERT INTO customers VALUES
 (14, 'Lakshmi Rao',     'Vizag',     'Andhra Pradesh',  'South'),
 (15, 'Naveen Joshi',    'Indore',    'Madhya Pradesh',  'Central');
 
--- ============================================================
 -- TABLE: products
--- ============================================================
 CREATE TABLE products (
     product_id   INT PRIMARY KEY,
     product_name VARCHAR(100),
@@ -60,13 +55,11 @@ INSERT INTO products VALUES
 (10, 'Bookshelf',            'Furniture',    8000.00),
 (11, 'Webcam HD',            'Electronics',  3200.00),
 (12, 'Desk Lamp',            'Furniture',    1500.00),
-(13, 'SQL for Analytics',    'Books',         649.00),
+(13, 'novel',                'Books',         649.00),
 (14, 'Mousepad XL',          'Accessories',   599.00),
 (15, 'Laptop Stand',         'Accessories',  1800.00);
 
--- ============================================================
 -- TABLE: orders
--- ============================================================
 CREATE TABLE orders (
     order_id    INT PRIMARY KEY,
     customer_id INT REFERENCES customers(customer_id),
@@ -112,9 +105,7 @@ INSERT INTO orders VALUES
 (1035, 5,  '2024-12-12', 'Delivered'),
 (1036, 6,  '2024-12-20', 'Delivered');
 
--- ============================================================
 -- TABLE: order_items
--- ============================================================
 CREATE TABLE order_items (
     item_id    INT PRIMARY KEY,
     order_id   INT REFERENCES orders(order_id),

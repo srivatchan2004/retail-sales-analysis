@@ -1,11 +1,7 @@
--- ============================================================
 -- RETAIL SALES ANALYSIS — Analytics Queries
 -- Author: Srivatchan
--- ============================================================
 
--- ============================================================
 -- QUERY 1: Total Revenue Overview
--- ============================================================
 SELECT
     SUM(quantity * unit_price) AS total_revenue,
     COUNT(DISTINCT order_id)   AS total_orders,
@@ -14,9 +10,7 @@ SELECT
 FROM order_items;
 
 
--- ============================================================
 -- QUERY 2: Revenue by Product Category
--- ============================================================
 SELECT
     p.category,
     COUNT(DISTINCT oi.order_id)            AS total_orders,
@@ -32,9 +26,7 @@ GROUP BY p.category
 ORDER BY total_revenue DESC;
 
 
--- ============================================================
 -- QUERY 3: Monthly Revenue Trend (2024)
--- ============================================================
 SELECT
     TO_CHAR(o.order_date, 'YYYY-MM')           AS month,
     COUNT(DISTINCT o.order_id)                  AS orders,
@@ -54,9 +46,7 @@ GROUP BY TO_CHAR(o.order_date, 'YYYY-MM')
 ORDER BY month;
 
 
--- ============================================================
 -- QUERY 4: Top 10 Customers by Lifetime Value
--- ============================================================
 SELECT
     c.customer_name,
     c.city,
@@ -74,9 +64,7 @@ ORDER BY lifetime_value DESC
 LIMIT 10;
 
 
--- ============================================================
 -- QUERY 5: Best Performing Products (by Revenue)
--- ============================================================
 SELECT
     p.product_name,
     p.category,
@@ -94,9 +82,7 @@ GROUP BY p.product_id, p.product_name, p.category
 ORDER BY total_revenue DESC;
 
 
--- ============================================================
 -- QUERY 6: Revenue by Region
--- ============================================================
 SELECT
     c.region,
     COUNT(DISTINCT c.customer_id)          AS customers,
@@ -110,9 +96,7 @@ GROUP BY c.region
 ORDER BY total_revenue DESC;
 
 
--- ============================================================
 -- QUERY 7: Customer Segmentation (RFM-style)
--- ============================================================
 WITH customer_stats AS (
     SELECT
         c.customer_id,
@@ -139,9 +123,7 @@ FROM customer_stats
 ORDER BY monetary DESC;
 
 
--- ============================================================
 -- QUERY 8: Running Total Revenue (Cumulative)
--- ============================================================
 WITH monthly AS (
     SELECT
         TO_CHAR(o.order_date, 'YYYY-MM')    AS month,
@@ -161,9 +143,7 @@ FROM monthly
 ORDER BY month;
 
 
--- ============================================================
 -- QUERY 9: Category Performance per Region (Pivot-style)
--- ============================================================
 SELECT
     c.region,
     SUM(CASE WHEN p.category = 'Electronics' THEN oi.quantity * oi.unit_price ELSE 0 END) AS electronics_revenue,
@@ -179,9 +159,7 @@ GROUP BY c.region
 ORDER BY total_revenue DESC;
 
 
--- ============================================================
 -- QUERY 10: Products Never Ordered (Data Quality Check)
--- ============================================================
 SELECT
     p.product_id,
     p.product_name,
