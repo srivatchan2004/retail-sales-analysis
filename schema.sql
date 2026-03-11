@@ -49,7 +49,7 @@ INSERT INTO products VALUES
 (4,  'Standing Desk',        'Furniture',    25000.00),
 (5,  'Python Programming Book','Books',       799.00),
 (6,  'Data Science Handbook','Books',         999.00),
-(7,  'USB-C Hub',            'Electronics',  2200.00),
+(7,  'USB-C Hub',            'Electronics',  2220.00),
 (8,  'Mechanical Keyboard',  'Electronics',  4500.00),
 (9,  'Monitor 27 inch',      'Electronics',  22000.00),
 (10, 'Bookshelf',            'Furniture',    8000.00),
